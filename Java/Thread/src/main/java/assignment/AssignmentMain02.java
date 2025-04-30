@@ -5,7 +5,6 @@ import static util.MyLogger.log;
 public class AssignmentMain02 {
 
     public static void main(String[] args) {
-
         Thread thread = new Thread(new Assignment02(), "counter");
         thread.start();
     }

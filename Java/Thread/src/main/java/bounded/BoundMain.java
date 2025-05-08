@@ -2,6 +2,7 @@ package bounded;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
 
 import static util.MyLogger.log;
 import static util.ThreadUtils.sleep;
@@ -11,9 +12,13 @@ public class BoundMain {
     public static void main(String[] args) {
         
         // 1. BoundedQueue 선택
-        // BoundedQueue queue = new BoundedQueueV4(2);
-        // BoundedQueue queue = new BoundedQueueV5(2);
-        BoundedQueue queue = new BoundedQueueV6_1(2);
+        //BoundedQueue queue = new BoundedQueueV4(2);
+        //BoundedQueue queue = new BoundedQueueV5(2);
+        //BoundedQueue queue = new BoundedQueueV6_1(2);
+        //BoundedQueue queue = new BoundedQueueV6_2(2);
+        // BoundedQueue queue = new BoundedQueueV6_3(2);
+        BoundedQueue queue = new BoundedQueueV6_4(2);
+        // BlockingQueue 로 바로 작업해도 된다.
 
         // 2. 생산자, 소비자 실행 순서 선택, 반드시 하나만 선택!
         producerFirst(queue);   // 생산자 먼저 실행

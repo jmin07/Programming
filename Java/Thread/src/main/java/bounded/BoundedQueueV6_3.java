@@ -2,21 +2,24 @@ package bounded;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import static util.MyLogger.log;
 
-public class BoundedQueueV6_1 implements BoundedQueue {
+public class BoundedQueueV6_3 implements BoundedQueue {
 
     private final BlockingQueue<String> queue;
 
-    public BoundedQueueV6_1(int max) {
+    // 특정 시간만큼 대기하도록 설정.
+    public BoundedQueueV6_3(int max) {
         this.queue = new ArrayBlockingQueue<>(max);
     }
 
     @Override
     public void put(String data) {
         try {
-            queue.put(data);
+            boolean result = queue.offer(data, 1, TimeUnit.MICROSECONDS);
+            log("저장 시도 결과 = " + result);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -25,7 +28,7 @@ public class BoundedQueueV6_1 implements BoundedQueue {
     @Override
     public String take() {
         try {
-            return queue.take();
+            return queue.poll(2, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
